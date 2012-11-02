@@ -94,7 +94,7 @@ public class Chatter {
 		});
 		
 		// receiver thread
-		Receiver receiver = new Receiver(display, socket, text_log);
+		Receiver receiver = new Receiver(socket, text_log);
 		new Thread(receiver).start();
 
 		// moar gui stuff
