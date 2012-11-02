@@ -4,25 +4,36 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.MulticastSocket;
 
-public class Receiver implements Runnable {
-	
-	private MulticastSocket s;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Text;
 
-	public Receiver(MulticastSocket s) {
-		this.s = s;
+public class Receiver implements Runnable {
+
+	private Display display;
+	private MulticastSocket socket;
+	private Text text_log;
+
+	public Receiver(Display display, MulticastSocket socket, Text text_log) {
+		this.display = display;
+		this.socket = socket;
+		this.text_log = text_log;
 	}
-	
+
 	public void run() {
 		byte[] buf = new byte[1000];
-		DatagramPacket recv = new DatagramPacket(buf, buf.length);
+		final DatagramPacket recv = new DatagramPacket(buf, buf.length);
 		while(true) {
 			try {
-				s.receive(recv);
+				socket.receive(recv);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(recv.getAddress() + ": " + new String(recv.getData(), 0, recv.getLength()));
+			display.syncExec(new Runnable() {
+				public void run() {
+					text_log.append(recv.getAddress().toString().substring(1) + ": " + new String(recv.getData(), 0, recv.getLength()) + System.getProperty("line.separator"));
+				}
+			});
 		}
 	}
 }
