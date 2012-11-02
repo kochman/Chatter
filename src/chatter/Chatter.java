@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -51,21 +50,11 @@ public class Chatter {
 		text_entry.setLayoutData(gridData);
 		text_entry.addSelectionListener(new SelectionListener() {
 			public void widgetDefaultSelected(SelectionEvent e) {
-				try {
-					Chatter.sendMessage(text_entry.getText(), socket, group);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Chatter.sendMessage(text_entry.getText(), socket, group);
 				text_entry.setText("");
 			}
 			public void widgetSelected(SelectionEvent e) {
-				try {
-					Chatter.sendMessage(text_entry.getText(), socket, group);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Chatter.sendMessage(text_entry.getText(), socket, group);
 				text_entry.setText("");
 			}
 		});
@@ -74,21 +63,11 @@ public class Chatter {
 		button.setText("Send");
 		button.addSelectionListener(new SelectionListener() {
 			public void widgetDefaultSelected(SelectionEvent e) {
-				try {
-					Chatter.sendMessage(text_entry.getText(), socket, group);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Chatter.sendMessage(text_entry.getText(), socket, group);
 				text_entry.setText("");
 			}
 			public void widgetSelected(SelectionEvent e) {
-				try {
-					Chatter.sendMessage(text_entry.getText(), socket, group);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Chatter.sendMessage(text_entry.getText(), socket, group);
 				text_entry.setText("");
 			}
 		});
@@ -107,10 +86,15 @@ public class Chatter {
 		display.dispose();
 	}
 
-	public static void sendMessage(String message, MulticastSocket s, InetAddress group) throws IOException {
+	public static void sendMessage(String message, MulticastSocket s, InetAddress group) {
 		DatagramPacket packet = new DatagramPacket(message.getBytes(), message.length(),
 				group, 5172);
-		s.send(packet);
+		try {
+			s.send(packet);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
