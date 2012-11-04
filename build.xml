@@ -1,0 +1,33 @@
+<project name="Chatter">
+
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="lib" />
+		<get dest="lib" src="http://chatter.kochman.org/lib/swt-linux32-4.2.1.jar" />
+		<get dest="lib" src="http://chatter.kochman.org/lib/swt-linux64-4.2.1.jar" />
+		<get dest="lib" src="http://chatter.kochman.org/lib/swt-osx32-4.2.1.jar" />
+		<get dest="lib" src="http://chatter.kochman.org/lib/swt-osx64-4.2.1.jar" />
+		<get dest="lib" src="http://chatter.kochman.org/lib/swt-win32-4.2.1.jar" />
+		<get dest="lib" src="http://chatter.kochman.org/lib/swt-win64-4.2.1.jar" />
+		<path id="libraries">
+			<fileset dir="lib" />
+		</path>
+		<mkdir dir="build/classes" />
+		<javac srcdir="src" destdir="build/classes" classpathref="libraries" />
+	</target>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="lib" />
+		<get dest="lib" src="http://chatter.kochman.org/lib/swtjar.jar" />
+		<mkdir dir="build/jar" />
+		<taskdef name="swtjar" classname="org.swtjar.ant.SWTJarTask" classpath="lib/swtjar.jar" />
+		<swtjar jarfile="build/jar/Chatter.jar" targetmainclass="Chatter" swtversion="4.2.1">
+			<fileset dir="build/classes" includes="**/*.class" />
+			<fileset dir="lib" includes="swt-*-4.2.1.jar" />
+		</swtjar>
+	</target>
+
+</project>

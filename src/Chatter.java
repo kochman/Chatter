@@ -1,5 +1,3 @@
-package chatter;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -96,5 +94,5 @@ public class Chatter {
 			e.printStackTrace();
 		}
 	}
-
+	
 }
