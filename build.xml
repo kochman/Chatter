@@ -6,12 +6,12 @@
 
 	<target name="compile">
 		<mkdir dir="lib" />
-		<get dest="lib" src="http://chatter.kochman.org/lib/swt-linux32-4.2.1.jar" />
-		<get dest="lib" src="http://chatter.kochman.org/lib/swt-linux64-4.2.1.jar" />
-		<get dest="lib" src="http://chatter.kochman.org/lib/swt-osx32-4.2.1.jar" />
-		<get dest="lib" src="http://chatter.kochman.org/lib/swt-osx64-4.2.1.jar" />
-		<get dest="lib" src="http://chatter.kochman.org/lib/swt-win32-4.2.1.jar" />
-		<get dest="lib" src="http://chatter.kochman.org/lib/swt-win64-4.2.1.jar" />
+		<get src="http://chatter.kochman.org/lib/swt-linux32-4.2.1.jar" dest="lib" usetimestamp="true" />
+		<get src="http://chatter.kochman.org/lib/swt-linux64-4.2.1.jar" dest="lib" usetimestamp="true" />
+		<get src="http://chatter.kochman.org/lib/swt-osx32-4.2.1.jar" dest="lib" usetimestamp="true" />
+		<get src="http://chatter.kochman.org/lib/swt-osx64-4.2.1.jar" dest="lib" usetimestamp="true" />
+		<get src="http://chatter.kochman.org/lib/swt-win32-4.2.1.jar" dest="lib" usetimestamp="true" />
+		<get src="http://chatter.kochman.org/lib/swt-win64-4.2.1.jar" dest="lib" usetimestamp="true" />
 		<path id="libraries">
 			<fileset dir="lib" />
 		</path>
@@ -21,7 +21,7 @@
 
 	<target name="jar" depends="compile">
 		<mkdir dir="lib" />
-		<get dest="lib" src="http://chatter.kochman.org/lib/swtjar.jar" />
+		<get src="http://chatter.kochman.org/lib/swtjar.jar" dest="lib" usetimestamp="true" />
 		<mkdir dir="build/jar" />
 		<taskdef name="swtjar" classname="org.swtjar.ant.SWTJarTask" classpath="lib/swtjar.jar" />
 		<swtjar jarfile="build/jar/Chatter.jar" targetmainclass="Chatter" swtversion="4.2.1">
