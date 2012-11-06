@@ -16,7 +16,7 @@
 			<fileset dir="lib" />
 		</path>
 		<mkdir dir="build/classes" />
-		<javac srcdir="src" destdir="build/classes" classpathref="libraries" />
+		<javac srcdir="src" destdir="build/classes" classpathref="libraries" includeantruntime="false" />
 	</target>
 
 	<target name="jar" depends="compile">
