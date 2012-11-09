@@ -30,4 +30,10 @@
 		</swtjar>
 	</target>
 
+	<target name="run" depends="jar">
+		<java jar="build/jar/Chatter.jar" fork="true">
+			<arg value="-XstartOnFirstThread" />
+		</java>
+	</target>
+
 </project>
